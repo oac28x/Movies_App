@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TemplatedView xmlns="http://xamarin.com/schemas/2014/forms"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               x:Class="TestMovies.CustomViews.CustomSnackBar"
+               TranslationY="41">
+    <TemplatedView.ControlTemplate>
+        <ControlTemplate>
+            <Grid>
+                <Label Text="{TemplateBinding Message}"
+                       VerticalOptions="Center" HorizontalOptions="Center"
+                       Margin="20,0" LineBreakMode="WordWrap" MaxLines="1"
+                       FontSize="Default"
+                       TextColor="White"/>
+            </Grid>
+        </ControlTemplate>
+    </TemplatedView.ControlTemplate>
+</TemplatedView>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TestMovies.App">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="PrimaryDarkColor">#102027</Color>
+            <Color x:Key="PrimaryColor">#1c313a</Color>
+            <Color x:Key="SecondaryColor">#29434e</Color>
+            <Color x:Key="SecondaryLightColor">#34515e</Color>
+
+                
+
+            
+            <Style x:Key="pageStyle" TargetType="Page" >
+                <!--Set ContentPages Styling-->
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondaryLightColor}" />
+            </Style>
+
+            
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="BarTextColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

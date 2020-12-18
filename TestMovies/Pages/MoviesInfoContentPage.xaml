@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customViews="clr-namespace:TestMovies.CustomViews"
+             x:Class="TestMovies.Pages.MoviesInfoContentPage"
+             Style="{x:StaticResource pageStyle}"
+             Title="Movie details">
+    <customViews:CustomParallaxLayout x:Name="parallaxLayout"
+                                      ParallaxSpeed="5"
+                                      VerticalOptions="FillAndExpand"
+                                      ScrollViewToScroll="{x:Reference scrollContainer}"
+                                      ParallaxHeading="{x:Reference parallaxHeading}">
+        <Frame x:Name="parallaxHeading" BackgroundColor="{x:StaticResource SecondaryColor}" VerticalOptions="Start" Padding="15" CornerRadius="0" HasShadow="False">
+            <Label Text="{Binding MovieData.Title, Mode=OneWay}" HorizontalTextAlignment="Center" TextColor="White" FontSize="Medium"/>
+        </Frame>
+        <ScrollView x:Name="scrollContainer">
+            <StackLayout Spacing="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <customViews:CustomCachedImage Grid.Column="0" Grid.Row="0"
+                            Source="{Binding MovieData.PosterImgUrl, Mode=OneWay}"
+                            HorizontalOptions="FillAndExpand"
+                            Aspect="AspectFill"
+                            FadeAnimationEnabled="True"
+                            DownsampleToViewSize="True"
+                            BitmapOptimizations="False"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <customViews:CustomCachedImage Grid.Column="0" Grid.Row="0"
+                            Source="{Binding MovieData.PosterImgUrl, Mode=OneWay}"
+                            HorizontalOptions="FillAndExpand"
+                            Aspect="AspectFill"
+                            FadeAnimationEnabled="True"
+                            DownsampleToViewSize="True"
+                            BitmapOptimizations="False"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <customViews:CustomCachedImage Grid.Column="0" Grid.Row="0"
+                            Source="{Binding MovieData.PosterImgUrl, Mode=OneWay}"
+                            HorizontalOptions="FillAndExpand"
+                            Aspect="AspectFill"
+                            FadeAnimationEnabled="True"
+                            DownsampleToViewSize="True"
+                            BitmapOptimizations="False"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <customViews:CustomCachedImage Grid.Column="0" Grid.Row="0"
+                            Source="{Binding MovieData.PosterImgUrl, Mode=OneWay}"
+                            HorizontalOptions="FillAndExpand"
+                            Aspect="AspectFill"
+                            FadeAnimationEnabled="True"
+                            DownsampleToViewSize="True"
+                            BitmapOptimizations="False"/>
+                </Grid>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*"/>
+                        <ColumnDefinition Width="50*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <customViews:CustomCachedImage Grid.Column="0" Grid.Row="0"
+                            Source="{Binding MovieData.PosterImgUrl, Mode=OneWay}"
+                            HorizontalOptions="FillAndExpand"
+                            Aspect="AspectFill"
+                            FadeAnimationEnabled="True"
+                            DownsampleToViewSize="True"
+                            BitmapOptimizations="False"/>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </customViews:CustomParallaxLayout>
+</ContentPage>

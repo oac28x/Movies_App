@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<popUp:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:popUp="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             x:Class="TestMovies.Pages.PopUpPages.LoadingPopUpPage">
+    <Frame BackgroundColor="{StaticResource SecondaryColor}" Padding="10" Opacity="0.8" VerticalOptions="Center" HorizontalOptions="Center" CornerRadius="10">
+        <ActivityIndicator IsRunning="{Binding IsLoading, Mode=OneWay}" HorizontalOptions="Center" VerticalOptions="Center" Color="White"/>
+    </Frame>
+</popUp:PopupPage>
