@@ -120,7 +120,7 @@ namespace TestMovies.ViewModels
             {
                 switch (Device.Idiom)
                 {
-                    case TargetIdiom.Phone:
+                    case TargetIdiom.Phone: //Change to Tablet used phone use for testing porpuses
                         return !IsLandscape ? 0 : new GridLength(50, GridUnitType.Star);
                     default:
                         return 0;
