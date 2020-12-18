@@ -5,7 +5,7 @@ namespace TestMovies.ViewModels.Base
     public class BaseViewModel : Observable, IBaseViewModel
     {
         bool _isLoading = false;
-        bool _isPortrait = true;
+        bool _isLandscape = true;
         bool _isReady = false;
         string _lang = "en";
 
@@ -33,12 +33,12 @@ namespace TestMovies.ViewModels.Base
             }
         }
 
-        virtual public bool IsPortrait
+        virtual public bool IsLandscape
         {
-            get { return _isPortrait; }
+            get { return _isLandscape; }
             set
             {
-                _isPortrait = value;
+                _isLandscape = value;
                 OnPropertyChanged();
             }
         }

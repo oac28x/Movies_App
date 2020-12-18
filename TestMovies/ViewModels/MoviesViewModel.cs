@@ -19,6 +19,8 @@ namespace TestMovies.ViewModels
         int _totalPages = 100;          //Set default value grater than _pageCounter
         bool _isMoviesLoading = false;
         bool _gointToNewPage = false;
+        bool _bgImageIsVisible = true;
+        GridLength _moviesContentWidth = 0;
 
         MovieModel[] _selectedItem = new MovieModel[2];
         private ObservableCollection<MovieModel> _moviesCollection = new ObservableCollection<MovieModel>();
@@ -27,21 +29,16 @@ namespace TestMovies.ViewModels
         private readonly IViewModelFactory _viewModelService;
         private readonly IComponentContext _componentContext;
 
-        public override bool IsPortrait
+        public override bool IsLandscape
         {
-            get => base.IsPortrait;
+            get => base.IsLandscape;
             set
             {
-                base.IsPortrait = value;
+                base.IsLandscape = value;
 
-                if (IsPortrait)
-                {
-                    CollectionColumns = Device.Idiom == TargetIdiom.Phone ? 2 : 3;
-                }
-                else
-                {
-                    CollectionColumns = 3;
-                }
+                OnPropertyChanged(nameof(CollectionColumns));
+                OnPropertyChanged(nameof(MoviesMainColumnWidth));
+                OnPropertyChanged(nameof(MoviesContentColumnWidth));
             }
         }
 
@@ -67,23 +64,11 @@ namespace TestMovies.ViewModels
                 }
                 else
                 {
-                    IsLoading = value; 
+                    IsLoading = value;
                 }
 
             }
         }
-
-        private int collectionColumns = 2;
-        public int CollectionColumns
-        {
-            get => collectionColumns;
-            set
-            {
-                collectionColumns = value;
-                OnPropertyChanged();
-            }
-        }
-
         
         public ObservableCollection<MovieModel> MoviesCollection
         {
@@ -114,6 +99,60 @@ namespace TestMovies.ViewModels
             }
         }
 
+
+        public GridLength MoviesMainColumnWidth
+        {
+            get
+            {
+                switch (Device.Idiom)
+                {
+                    case TargetIdiom.Phone:
+                        return !IsLandscape ? new GridLength(100, GridUnitType.Star) : new GridLength(50, GridUnitType.Star);
+                    default:
+                        return new GridLength(100, GridUnitType.Star);
+                }
+            }
+        }
+
+        public GridLength MoviesContentColumnWidth
+        {
+            get
+            {
+                switch (Device.Idiom)
+                {
+                    case TargetIdiom.Phone:
+                        return !IsLandscape ? 0 : new GridLength(50, GridUnitType.Star);
+                    default:
+                        return 0;
+                }
+            }
+        }
+
+        public int CollectionColumns
+        {
+            get
+            {
+                if (!IsLandscape)
+                {
+                    return Device.Idiom == TargetIdiom.Phone ? 2 : 3;
+                }
+                else
+                {
+                    return 3;
+                }
+            }
+        }
+
+        public bool BgImageIsVisible
+        {
+            get => _bgImageIsVisible;
+            set
+            {
+                _bgImageIsVisible = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand GoToMoviesInfoPage => new Command(() => GoToDetailsPage(), () => !_gointToNewPage && SelectedItem != null);
         public ICommand GoToSettingsPage => new Command(async () => await Navigator.PushAsync<SettingsViewModel>(), () => !_gointToNewPage);
 
@@ -133,6 +172,7 @@ namespace TestMovies.ViewModels
 
         async void GoToDetailsPage()
         {
+            if (IsLandscape) return;
             _gointToNewPage = true;
 
             await Task.Delay(TimeSpan.FromMilliseconds(150)); //Wait animation to go next page
@@ -153,6 +193,7 @@ namespace TestMovies.ViewModels
             MoviesCollection.AddRange(movies.Movies);
 
             IsMoviesLoading = false;
+            BgImageIsVisible = false;
 
             _totalPages = movies.TotalPages;
             _pageCounter = movies.Page + 1;

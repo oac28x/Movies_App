@@ -1,60 +1,70 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:contentViews="clr-namespace:TestMovies.ContentViews"
              xmlns:customViews="clr-namespace:TestMovies.CustomViews"
              x:Class="TestMovies.Pages.MoviesContentPage"
              Style="{x:StaticResource pageStyle}"
              NavigationPage.HasBackButton="False"
+             x:Name="moviesPageId"
              Title="Movies Page">
     <ContentPage.ToolbarItems> 
         <ToolbarItem Command="{Binding GoToSettingsPage}" Text="Settings" Order="Secondary"/>
         <ToolbarItem Command="{Binding RateAppTapped}" Text="Rate App" Order="Secondary"/>
     </ContentPage.ToolbarItems>
-    <customViews:CustomParallaxLayout x:Name="parallaxLayout" 
+    <Grid ColumnSpacing="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{Binding MoviesMainColumnWidth}"/>
+            <ColumnDefinition Width="{Binding MoviesContentColumnWidth}" />
+        </Grid.ColumnDefinitions>
+        <customViews:CustomParallax x:Name="parallaxLayout" Grid.Column="0"
                                       VerticalOptions="FillAndExpand"
                                       ParallaxSpeed="16"
                                       ParallaxHeading="{x:Reference parallaxHeading}"
                                       CollectionViewToScroll="{x:Reference moviesCollectionView}">
 
-        <Frame x:Name="parallaxHeading" BackgroundColor="{x:StaticResource SecondaryColor}" VerticalOptions="Start" Padding="15" CornerRadius="0">
-            <Label Text="Most pupular movies" HorizontalOptions="Center" TextColor="White" FontSize="Medium"/>
-        </Frame>
+            <Frame x:Name="parallaxHeading" BackgroundColor="{x:StaticResource SecondaryColor}" VerticalOptions="Start" Padding="15" CornerRadius="0">
+                <Label Text="Most pupular movies" HorizontalOptions="Center" TextColor="White" FontSize="Medium"/>
+            </Frame>
 
-        <!-- Bind is visible to ObservableColection.count or error-->
-        <StackLayout VerticalOptions="Center" IsVisible="True">
-            <Image  Source="movie_background" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit"/>
-            <Label Text="No content, try reloading." HorizontalOptions="Center" TextColor="White" FontSize="Medium"/>
-        </StackLayout>
+            <!-- Bind is visible to ObservableColection.count or error-->
+            <StackLayout VerticalOptions="Center" IsVisible="{Binding BgImageIsVisible, Mode=OneWay}">
+                <Image  Source="movie_background" HorizontalOptions="Center" VerticalOptions="Center" Aspect="AspectFit"/>
+                <Label Text="No content, try reloading." HorizontalOptions="Center" TextColor="White" FontSize="Medium"/>
+            </StackLayout>
         
-        <!--<RefreshView >-->
-        <CollectionView x:Name="moviesCollectionView" 
-                        ItemsSource="{Binding MoviesCollection, Mode=OneWay}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
-                        VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Default"
-                        SelectionMode="Single"
-                        SelectionChangedCommand="{Binding GoToMoviesInfoPage}"
-                        RemainingItemsThreshold="5"
-                        RemainingItemsThresholdReachedCommand="{Binding LoadMoreMovies}">
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout Orientation="Vertical" Span="{Binding CollectionColumns}" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid x:Name="imageGridContainer" Padding="0" ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
-                        <customViews:CustomCachedImage
-                        x:Name="movieImage"
-                        Source="{Binding PosterImgUrl, Mode=OneTime}"
-                        Animate="{Binding ItemSelected, Mode=OneWay}"
-                        HorizontalOptions="FillAndExpand"
-                        VerticalOptions="FillAndExpand"
-                        Aspect="AspectFill"
-                        DownsampleToViewSize="True"
-                        BitmapOptimizations="False"/>
-                        <Frame IsVisible="{Binding ItemSelected}" Margin="2" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" BorderColor="White" Opacity="0.6"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <!--</RefreshView>-->
-        <customViews:CustomSnackBar HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="40" BackgroundColor="#00B0FF" IsOpen="{Binding IsMoviesLoading}" Message="Cargando..."/>
-    </customViews:CustomParallaxLayout>
+            <!--<RefreshView >-->
+            <CollectionView x:Name="moviesCollectionView" 
+                            ItemsSource="{Binding MoviesCollection, Mode=OneWay}" SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
+                            VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Default"
+                            SelectionMode="Single"
+                            SelectionChangedCommand="{Binding GoToMoviesInfoPage}"
+                            RemainingItemsThreshold="5"
+                            RemainingItemsThresholdReachedCommand="{Binding LoadMoreMovies}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="{Binding CollectionColumns}" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid x:Name="imageGridContainer" Padding="0" ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+                            <customViews:CustomCachedImage
+                            x:Name="movieImage"
+                            Source="{Binding PosterImgUrl, Mode=OneTime}"
+                            Animate="{Binding ItemSelected, Mode=OneWay}"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            Aspect="AspectFill"
+                            DownsampleToViewSize="True"
+                            BitmapOptimizations="False"/>
+                            <Frame IsVisible="{Binding ItemSelected}" Margin="2" HasShadow="False" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Transparent" BorderColor="White" Opacity="0.6"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <!--</RefreshView>-->
+            <customViews:CustomSnackBar HorizontalOptions="FillAndExpand" VerticalOptions="End" HeightRequest="40" BackgroundColor="#00B0FF" IsOpen="{Binding IsMoviesLoading}" Message="Loading..."/>
+        </customViews:CustomParallax>
+        <contentViews:MoviesInfoContentView Grid.Column="1" Grid.Row="0" x:Name="contentMovieInfo" BindingContext="{Binding SelectedItem}" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                                            />
+    </Grid>
 </ContentPage>

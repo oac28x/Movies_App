@@ -38,5 +38,6 @@
     <Folder Include="DependencyServices\" />
     <Folder Include="Languages\" />
     <Folder Include="Pages\PopUpPages\" />
+    <Folder Include="ContentViews\" />
   </ItemGroup>
 </Project>

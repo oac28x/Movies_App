@@ -14,7 +14,7 @@ namespace TestMovies.Pages
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            parallaxLayout.HeadingHeight = parallaxHeading.Height;
+            contentMovieInfo.ParallaxLayout.HeadingHeight = contentMovieInfo.ParallaxHeading.Height;
         }
     }
 }

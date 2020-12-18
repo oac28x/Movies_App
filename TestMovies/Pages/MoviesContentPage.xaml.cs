@@ -49,27 +49,13 @@ namespace TestMovies.Pages
                 this.height = height;
                 if (width > height)
                 {
-                    _viewModel.IsPortrait = false;
+                    _viewModel.IsLandscape = true;
+                    moviesCollectionView.SelectedItem = null;
+                    contentMovieInfo.ParallaxLayout.HeadingHeight = contentMovieInfo.ParallaxHeading.Height;
                 }
                 else
                 {
-                    _viewModel.IsPortrait = true;
-
-                    //innerGrid.RowDefinitions.Clear();
-                    //innerGrid.ColumnDefinitions.Clear();
-                    //innerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-                    //innerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                    //innerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                    //innerGrid.Children.Remove(controlsGrid);
-                    //innerGrid.Children.Add(controlsGrid, 1, 0);
-
-                    //innerGrid.RowDefinitions.Clear();
-                    //innerGrid.ColumnDefinitions.Clear();
-                    //innerGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-                    //innerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Auto) });
-                    //innerGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-                    //innerGrid.Children.Remove(controlsGrid);
-                    //innerGrid.Children.Add(controlsGrid, 0, 1);
+                    _viewModel.IsLandscape = false; 
                 }
             }
         }

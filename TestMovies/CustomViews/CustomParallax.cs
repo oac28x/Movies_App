@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace TestMovies.CustomViews
 {
-    public partial class CustomParallaxLayout : Grid
+    public class CustomParallax : Grid
     {
         private CollectionView _collectionViewToScroll;
         private ScrollView _scrollViewToScroll;
 
+
+        //Did not binded property it is just assigned on instance creation
         public int ParallaxSpeed { get; set; } = 5;     //Bigger -> slower
 
         private double _headinHeight = 0;
@@ -19,8 +19,8 @@ namespace TestMovies.CustomViews
             set
             {
                 _headinHeight = value;
-                if(_collectionViewToScroll != null) _collectionViewToScroll.Margin = new Thickness(0, _headinHeight, 0, 0);
-                if(_scrollViewToScroll != null) _scrollViewToScroll.Margin = new Thickness(0, _headinHeight, 0, 0);
+                if (_collectionViewToScroll != null) _collectionViewToScroll.Margin = new Thickness(0, _headinHeight, 0, 0);
+                if (_scrollViewToScroll != null) _scrollViewToScroll.Margin = new Thickness(0, _headinHeight, 0, 0);
             }
         }
 
@@ -44,9 +44,9 @@ namespace TestMovies.CustomViews
             }
         }
 
-        public CustomParallaxLayout()
+        public CustomParallax()
         {
-            InitializeComponent();
+
         }
 
 
@@ -78,12 +78,12 @@ namespace TestMovies.CustomViews
             else
             {
                 double div = scrolledValue / ParallaxSpeed;
-                
+
                 rowHeight = -div;
 
                 if (div >= HeadingHeight) rowHeight = -HeadingHeight;
 
-                if(lastRowHeight == rowHeight) return;
+                if (lastRowHeight == rowHeight) return;
             }
 
             lastRowHeight = rowHeight;

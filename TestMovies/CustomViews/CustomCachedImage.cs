@@ -26,7 +26,7 @@ namespace TestMovies.CustomViews
             this.CacheDuration = TimeSpan.FromDays(CACHING_DAYS);
             this.RetryCount = 2;
             this.RetryDelay = 200;
-            this.FadeAnimationEnabled = false;
+            this.FadeAnimationEnabled = true;
         }
 
         private static void AnimateChanged(BindableObject bindable, object oldValue, object newValue)
